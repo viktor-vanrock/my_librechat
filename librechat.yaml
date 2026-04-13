@@ -1,0 +1,124 @@
+version: 1.3.6
+cache: false
+
+registration:
+  socialLogins: []
+  
+endpoints:
+  custom:
+    - name: "OpenRouter"
+      # Для проброса ключа из интерфейса
+      apiKey: "user_provided"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default: ["openai/gpt-4o"]
+        fetch: true                              
+      titleConvo: true
+      titleModel: "openai/gpt-4o"
+      dropParams: ["stop"]
+      modelDisplayLabel: "OpenRouter"
+  agents:
+    # Полностью отключает интерфейс конструктора агентов
+    disableBuilder: true
+    # Убирает пункт "Воспоминания" (Memory) из интерфейса агента
+    memory: false
+    # Оставляет список возможностей агента пустым (скрывает кнопки инструментов)
+    capabilities: []
+
+fileConfig:
+  endpoints:
+    custom:
+      # Лимит на количество загруженных файлов
+      fileLimit: 5
+      supportedMimeTypes:
+        # Текстовые файлы
+        - "text/plain"
+        - "text/csv"
+        - "text/markdown"
+        - "application/json"
+        # Документы
+        - "application/pdf"
+        - "application/msword"
+        - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        - "application/vnd.ms-excel"
+        - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        - "application/vnd.ms-powerpoint"
+        - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        - "application/rtf"
+        # Изображения
+        - "image/jpeg"
+        - "image/png"
+        - "image/gif"
+        - "image/webp"
+        - "image/bmp"
+        - "image/tiff"
+    default:
+      fileLimit: 5
+  
+  # OCR настройки (для документов и изображений)
+  ocr:
+    supportedMimeTypes:
+      # Документы
+      - "application/pdf"
+      - "application/msword"
+      - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      - "application/vnd.ms-excel"
+      - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      - "application/vnd.ms-powerpoint"
+      - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+      - "application/rtf"
+      - "text/plain"
+      - "text/csv"
+      # Изображения
+      - "image/jpeg"
+      - "image/png"
+      - "image/gif"
+      - "image/webp"
+      - "image/bmp"
+      - "image/tiff"
+  
+  # Текстовый парсер
+  text:
+    supportedMimeTypes:
+      - "text/plain"
+      - "text/csv"
+      - "text/markdown"
+      - "application/json"
+      - "application/javascript"
+      - "application/typescript"
+      - "text/css"
+      - "text/x-python"
+      - "text/x-java"
+      - "text/x-c"
+      - "text/x-cpp"
+      - "text/x-sh"
+      - "text/x-sql"
+      - "application/x-yaml"
+      - "text/x-pascal"
+      - "text/x-rust"
+      - "text/x-go"
+
+interface:
+  multiConvo: false
+  bookmarks: false
+  parameters: false
+  presets: false
+  prompts: false
+  # Скрыть пункт "Агенты" в боковом меню
+  agents: false
+  # Скрыть пункт "Магазин агентов" (Marketplace)
+  marketplace:
+    use: false
+  # Скрыть MCP сервера в выпадающем меню чата (оставит их доступными только для агентов)
+  mcpServers:
+    use: false
+    create: false
+    share: false
+    public: false
+memory:
+  disabled: true
+# Полное отключение MCP в интерфейсе обычного чата
+# mcpServers:
+#   # Убирает MCP сервера из меню выбора под строкой ввода сообщения
+#   chatMenu:
+#     use: false
