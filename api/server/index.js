@@ -37,6 +37,11 @@ const staticCache = require('./utils/staticCache');
 const optionalJwtAuth = require('./middleware/optionalJwtAuth');
 const noIndex = require('./middleware/noIndex');
 const routes = require('./routes');
+const { requireJwtAuth } = require('~/server/middleware');
+
+const pkg = require('../../packages/api/dist/index.js');
+const openrouterBalanceRoutes =
+  pkg.OpenrouterStatisticsRoutes || pkg.default?.OpenrouterStatisticsRoutes;
 
 const { PORT, HOST, ALLOW_SOCIAL_LOGIN, DISABLE_COMPRESSION, TRUST_PROXY } = process.env ?? {};
 
@@ -164,6 +169,7 @@ const startServer = async () => {
   app.use('/api/api-keys', routes.apiKeys);
   app.use('/api/user', routes.user);
   app.use('/api/search', routes.search);
+  app.use('/api/openrouter', requireJwtAuth, openrouterBalanceRoutes);
   app.use('/api/messages', routes.messages);
   app.use('/api/convos', routes.convos);
   app.use('/api/presets', routes.presets);

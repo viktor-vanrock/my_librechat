@@ -1,3 +1,5 @@
+import OpenrouterStatisticsRoutes from './custom/routes/openrouterStatisticsRoutes';
+
 export * from './app';
 /* Admin */
 export * from './admin';
@@ -57,3 +59,6 @@ export { memoryDiagnostics } from './utils/memory';
 export type * from './mcp/types';
 export type * from './flow/types';
 export type * from './types';
+
+// custom components export for /dist
+export { OpenrouterStatisticsRoutes };

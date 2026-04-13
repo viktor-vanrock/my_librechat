@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { EModelEndpoint, alternateName, isAssistantsEndpoint } from 'librechat-data-provider';
 import {
@@ -27,6 +27,7 @@ import OpenAIConfig from './OpenAIConfig';
 import OtherConfig from './OtherConfig';
 import HelpText from './HelpText';
 import { logger } from '~/utils';
+import { useCurrentKey } from '~/Providers';
 
 const endpointComponents = {
   [EModelEndpoint.google]: GoogleConfig,
@@ -171,11 +172,21 @@ const SetKeyDialog = ({
   });
 
   const [userKey, setUserKey] = useState('');
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const [expiresAtLabel, setExpiresAtLabel] = useState(EXPIRY.TWELVE_HOURS.label);
   const { getExpiry, saveUserKey } = useUserKey(endpoint);
   const { showToast } = useToastContext();
   const localize = useLocalize();
+  const { setCurrentKey } = useCurrentKey();
 
+  useEffect(() => {
+    if(!isFirstRender) {
+      setCurrentKey()
+    } else {
+      setIsFirstRender(false);
+    }
+  }, [getExpiry])
+  
   const expirationOptions = Object.values(EXPIRY);
 
   const handleExpirationChange = (label: string) => {

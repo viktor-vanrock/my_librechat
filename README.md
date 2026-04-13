@@ -223,3 +223,9 @@ We thank [Locize](https://locize.com) for their translation management tools tha
     <img src="https://github.com/user-attachments/assets/d6b70894-6064-475e-bb65-92a9e23e0077" alt="Locize Logo" height="50">
   </a>
 </p>
+
+# Старт проекта для dev
+# npm ci
+# npm run frontend
+# docker-compose -f docker-compose.deps-only.yml up
+# npm run backend

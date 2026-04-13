@@ -12,6 +12,8 @@ import AddMultiConvo from './AddMultiConvo';
 import { useHasAccess } from '~/hooks';
 import { cn } from '~/utils';
 import store from '~/store';
+import { OpenrouterButton } from '../OpenrouterButton';
+import { CurrentKeyProvider } from '~/Providers';
 
 const defaultInterface = getConfigDefaults().interface;
 
@@ -53,18 +55,21 @@ function Header() {
                 !isSmallScreen ? 'transition-all duration-200 ease-in-out' : '',
               )}
             >
-              <ModelSelector startupConfig={startupConfig} />
-              {interfaceConfig.presets === true && interfaceConfig.modelSelect && <PresetsMenu />}
-              {hasAccessToBookmarks === true && <BookmarkMenu />}
-              {hasAccessToMultiConvo === true && <AddMultiConvo />}
-              {isSmallScreen && (
-                <>
-                  <ExportAndShareMenu
-                    isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false}
-                  />
-                  {hasAccessToTemporaryChat === true && <TemporaryChat />}
-                </>
-              )}
+             <CurrentKeyProvider>
+                <ModelSelector startupConfig={startupConfig} />
+                {interfaceConfig.presets === true && interfaceConfig.modelSelect && <PresetsMenu />}
+                {hasAccessToBookmarks === true && <BookmarkMenu />}
+                {hasAccessToMultiConvo === true && <AddMultiConvo />}
+                <OpenrouterButton />
+                {isSmallScreen && (
+                  <>
+                    <ExportAndShareMenu
+                      isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false}
+                    />
+                    {hasAccessToTemporaryChat === true && <TemporaryChat />}
+                  </>
+                )}
+              </CurrentKeyProvider>
             </div>
           )}
         </div>
