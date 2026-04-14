@@ -14,7 +14,6 @@ export const useStatistics = () => {
   const fetchStatistics = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-          console.log('22222222222222222', hasCurrentKey)
 
     try {
       const response = await fetch('/api/openrouter/balance', {
@@ -46,7 +45,6 @@ export const useStatistics = () => {
   }, [token]);
 
   useEffect(() => {
-    console.log('hasCurrentKey', hasCurrentKey)
     if (token) {
       fetchStatistics();
     }

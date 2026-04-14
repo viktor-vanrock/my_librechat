@@ -27,7 +27,6 @@ const StatisticsModal: React.FC<Props> = ({
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      console.log('pressEscape');
       if (e.key === 'Escape') {
         onClose();
       }
