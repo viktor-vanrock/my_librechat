@@ -9,6 +9,7 @@ endpoints:
     - name: "OpenRouter"
       # Для проброса ключа из интерфейса
       apiKey: "user_provided"
+      userProvide: true
       baseURL: "https://openrouter.ai/api/v1"
       models:
         default: ["openai/gpt-4o"]
@@ -22,8 +23,9 @@ endpoints:
     disableBuilder: true
     # Убирает пункт "Воспоминания" (Memory) из интерфейса агента
     memory: false
-    # Оставляет список возможностей агента пустым (скрывает кнопки инструментов)
-    capabilities: []
+    # Позволяет отправлять файлы как текст.
+    capabilities:
+      - "context"
 
 fileConfig:
   endpoints:

@@ -294,7 +294,7 @@ const SetKeyDialog = ({
           </OGDialogTitle>
         </OGDialogHeader>
         <div className="grid w-full items-center gap-2 py-4">
-          <small className="text-red-600">
+          {/* <small className="text-red-600">
             {expiryTime === 'never'
               ? localize('com_endpoint_config_key_never_expires')
               : `${localize('com_endpoint_config_key_encryption')} ${new Date(
@@ -308,7 +308,8 @@ const SetKeyDialog = ({
             options={expirationOptions.map((option) => option.label)}
             sizeClasses="w-[185px]"
             portal={false}
-          />
+          /> */}
+          {/* закоментирован выбор срока использования openrouter ключа по умолчанию бессрочный(never) */}
           <div className="mt-2" />
           <FormProvider {...methods}>
             <EndpointComponent

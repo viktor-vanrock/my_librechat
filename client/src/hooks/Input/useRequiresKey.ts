@@ -14,6 +14,6 @@ export default function useRequiresKey() {
   );
   const { getExpiry } = useUserKey(endpoint ?? '');
   const expiryTime = getExpiry();
-  const requiresKey = !expiryTime && userProvidesKey;
+  const requiresKey = expiryTime === 'never' && userProvidesKey;
   return { requiresKey };
 }
