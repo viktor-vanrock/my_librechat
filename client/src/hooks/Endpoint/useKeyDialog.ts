@@ -36,6 +36,7 @@ export const useKeyDialog = () => {
       keyDialogEndpoint,
       onOpenChange,
       handleOpenKeyDialog,
+      setKeyDialogOpen,
     }),
     [keyDialogOpen, keyDialogEndpoint, onOpenChange, handleOpenKeyDialog],
   );

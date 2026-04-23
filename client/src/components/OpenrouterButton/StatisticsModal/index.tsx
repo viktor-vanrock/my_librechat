@@ -16,15 +16,14 @@ interface Props {
   fetchStatistics: () => void;
 }
 
-const StatisticsModal: React.FC<Props> = ({ 
-   onClose,
-   isOpen,
-   statistics,
-   isLoading,
-   error,
-   fetchStatistics,
-  }) => {
-
+const StatisticsModal: React.FC<Props> = ({
+  onClose,
+  isOpen,
+  statistics,
+  isLoading,
+  error,
+  fetchStatistics,
+}) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -43,7 +42,9 @@ const StatisticsModal: React.FC<Props> = ({
     };
   }, []);
 
-  if(!isOpen) { return null }
+  if (!isOpen) {
+    return null;
+  }
 
   const isNeedStatisticsErrorText = error?.code && error?.code !== ERROR_NUMBER.INSUFFICIENT_FUNDS;
 
@@ -56,10 +57,7 @@ const StatisticsModal: React.FC<Props> = ({
         <div className="mt-4">
           {isLoading && <StatisticsLoader />}
           {isNeedStatisticsErrorText && (
-            <StatisticsError
-              error={error.message || ''}
-              fetchBalance={fetchStatistics} 
-            />
+            <StatisticsError error={error.message || ''} fetchBalance={fetchStatistics} />
           )}
           {!isLoading && !isNeedStatisticsErrorText && statistics && (
             <div className="space-y-4">

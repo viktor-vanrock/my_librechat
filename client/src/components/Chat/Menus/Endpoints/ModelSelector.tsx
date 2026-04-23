@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { TooltipAnchor } from '@librechat/client';
-import { getConfigDefaults } from 'librechat-data-provider';
+import { EModelEndpointCustom, getConfigDefaults } from 'librechat-data-provider';
 import type { ModelSelectorProps } from '~/common';
 import {
   renderModelSpecs,
@@ -8,12 +8,12 @@ import {
   renderSearchResults,
   renderCustomGroups,
 } from './components';
-import { ModelSelectorProvider, useModelSelectorContext } from './ModelSelectorContext';
-import { ModelSelectorChatProvider } from './ModelSelectorChatContext';
+import { useModelSelectorContext } from './ModelSelectorContext';
 import { getSelectedIcon, getDisplayValue } from './utils';
 import { CustomMenu as Menu } from './CustomMenu';
 import DialogManager from './DialogManager';
 import { useLocalize } from '~/hooks';
+import { useCurrentKey } from '~/Providers';
 
 const defaultInterface = getConfigDefaults().interface;
 
@@ -39,6 +39,9 @@ function ModelSelectorContent() {
     keyDialogEndpoint,
   } = useModelSelectorContext();
 
+  const { isOpenDealogSetKey } = useCurrentKey();
+  const isKeyDialogOpen = keyDialogOpen || isOpenDealogSetKey;
+
   const selectedIcon = useMemo(
     () =>
       getSelectedIcon({
@@ -49,6 +52,7 @@ function ModelSelectorContent() {
       }),
     [mappedEndpoints, selectedValues, modelSpecs, endpointsConfig],
   );
+
   const selectedDisplayValue = useMemo(
     () =>
       getDisplayValue({
@@ -114,10 +118,10 @@ function ModelSelectorContent() {
         )}
       </Menu>
       <DialogManager
-        keyDialogOpen={keyDialogOpen}
+        keyDialogOpen={isKeyDialogOpen}
         onOpenChange={onOpenChange}
         endpointsConfig={endpointsConfig || {}}
-        keyDialogEndpoint={keyDialogEndpoint || undefined}
+        keyDialogEndpoint={EModelEndpointCustom.openRouter}
       />
     </div>
   );
@@ -132,11 +136,5 @@ export default function ModelSelector({ startupConfig }: ModelSelectorProps) {
     return null;
   }
 
-  return (
-    <ModelSelectorChatProvider>
-      <ModelSelectorProvider startupConfig={startupConfig}>
-        <ModelSelectorContent />
-      </ModelSelectorProvider>
-    </ModelSelectorChatProvider>
-  );
+  return <ModelSelectorContent />;
 }

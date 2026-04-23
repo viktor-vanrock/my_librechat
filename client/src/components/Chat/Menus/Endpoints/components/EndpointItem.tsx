@@ -12,6 +12,7 @@ import { ModelSpecItem } from './ModelSpecItem';
 import { filterModels } from '../utils';
 import { useLocalize } from '~/hooks';
 import { cn } from '~/utils';
+import * as Ariakit from '@ariakit/react';
 
 interface EndpointItemProps {
   endpoint: Endpoint;
@@ -142,108 +143,11 @@ function EndpointMenuContent({
 }
 
 export function EndpointItem({ endpoint, endpointIndex }: EndpointItemProps) {
-  const localize = useLocalize();
-  const {
-    selectedValues,
-    handleOpenKeyDialog,
-    handleSelectEndpoint,
-    endpointSearchValues,
-    setEndpointSearchValue,
-    endpointRequiresUserKey,
-  } = useModelSelectorContext();
-  const { endpoint: selectedEndpoint, modelSpec: selectedSpec } = selectedValues;
-
-  const searchValue = endpointSearchValues[endpoint.value] || '';
-  const isUserProvided = useMemo(
-    () => endpointRequiresUserKey(endpoint.value),
-    [endpointRequiresUserKey, endpoint.value],
+  return (
+    <Ariakit.ComboboxList className="p-0.5 pt-0">
+      <EndpointMenuContent endpoint={endpoint} endpointIndex={endpointIndex} />
+    </Ariakit.ComboboxList>
   );
-
-  const isAssistantsNotLoaded =
-    isAssistantsEndpoint(endpoint.value) && endpoint.models === undefined;
-
-  const renderIconLabel = () => (
-    <div className="flex min-w-0 items-center gap-2">
-      {endpoint.icon && (
-        <div className="flex shrink-0 items-center justify-center" aria-hidden="true">
-          {endpoint.icon}
-        </div>
-      )}
-      <span className="truncate text-left">{endpoint.label}</span>
-    </div>
-  );
-
-  const isEndpointSelected = !selectedSpec && selectedEndpoint === endpoint.value;
-
-  if (endpoint.hasModels) {
-    const placeholder =
-      isAgentsEndpoint(endpoint.value) || isAssistantsEndpoint(endpoint.value)
-        ? localize('com_endpoint_search_var', { 0: endpoint.label })
-        : localize('com_endpoint_search_endpoint_models', { 0: endpoint.label });
-    return (
-      <Menu
-        id={`endpoint-${endpoint.value}-menu`}
-        key={`endpoint-${endpoint.value}-item`}
-        searchValue={searchValue}
-        onSearch={(value) => setEndpointSearchValue(endpoint.value, value)}
-        combobox={<input placeholder=" " />}
-        comboboxLabel={placeholder}
-        onClick={() => handleSelectEndpoint(endpoint)}
-        label={
-          <div className="group flex w-full min-w-0 items-center justify-between gap-1.5 py-1 text-sm">
-            {renderIconLabel()}
-            <div className="flex shrink-0 items-center gap-1">
-              {isUserProvided && (
-                <SettingsButton endpoint={endpoint} handleOpenKeyDialog={handleOpenKeyDialog} />
-              )}
-              {isEndpointSelected && (
-                <>
-                  <CheckCircle2 className="size-4 shrink-0 text-text-primary" aria-hidden="true" />
-                  <VisuallyHidden>{localize('com_a11y_selected')}</VisuallyHidden>
-                </>
-              )}
-            </div>
-          </div>
-        }
-      >
-        <EndpointMenuContent endpoint={endpoint} endpointIndex={endpointIndex} />
-      </Menu>
-    );
-  } else {
-    return (
-      <MenuItem
-        id={`endpoint-${endpoint.value}-menu`}
-        key={`endpoint-${endpoint.value}-item`}
-        onClick={() => handleSelectEndpoint(endpoint)}
-        aria-selected={isEndpointSelected || undefined}
-        className="group flex w-full cursor-pointer items-center justify-between gap-1.5 py-2 text-sm"
-      >
-        {renderIconLabel()}
-        <div className="flex shrink-0 items-center gap-2">
-          {endpointRequiresUserKey(endpoint.value) && (
-            <SettingsButton endpoint={endpoint} handleOpenKeyDialog={handleOpenKeyDialog} />
-          )}
-          {isAssistantsNotLoaded && (
-            <TooltipAnchor
-              description={localize('com_ui_click_to_view_var', { 0: endpoint.label })}
-              side="top"
-              render={
-                <span className="flex items-center">
-                  <MousePointerClick className="size-4 text-text-secondary" aria-hidden="true" />
-                </span>
-              }
-            />
-          )}
-          {isEndpointSelected && !isAssistantsNotLoaded && (
-            <>
-              <CheckCircle2 className="size-4 shrink-0 text-text-primary" aria-hidden="true" />
-              <VisuallyHidden>{localize('com_a11y_selected')}</VisuallyHidden>
-            </>
-          )}
-        </div>
-      </MenuItem>
-    );
-  }
 }
 
 export function renderEndpoints(mappedEndpoints: Endpoint[]) {

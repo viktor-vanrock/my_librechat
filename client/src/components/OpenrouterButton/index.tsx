@@ -9,10 +9,10 @@ export const OpenrouterButton = () => {
   const { statistics, isLoading, error, fetchStatistics } = useStatistics();
 
   const handleClick = () => toggleOpen((prev) => !prev);
-  
+
   const isNeedStatisticsModal = !(
-    error?.code === ERROR_NUMBER.OPENROUTER_KEY_NOT_FOUND || 
-    error?.code === ERROR_NUMBER.INVALID_API_KEY || 
+    error?.code === ERROR_NUMBER.OPENROUTER_KEY_NOT_FOUND ||
+    error?.code === ERROR_NUMBER.INVALID_API_KEY ||
     error?.code === ERROR_NUMBER.RATE_LIMIT
   );
 

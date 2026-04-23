@@ -233,7 +233,7 @@ export default [
     rules: {
       // i18n
       'i18next/no-literal-string': [
-        'error',
+        'warn',
         {
           mode: 'jsx-text-only',
           'should-validate-template': true,

@@ -27,6 +27,10 @@ export enum EModelEndpoint {
   bedrock = 'bedrock',
 }
 
+export enum EModelEndpointCustom {
+  openRouter = 'OpenRouter',
+}
+
 /** Mirrors `@librechat/agents` providers */
 export enum Providers {
   OPENAI = 'openAI',

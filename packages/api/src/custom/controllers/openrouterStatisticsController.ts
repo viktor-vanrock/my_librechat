@@ -10,7 +10,7 @@ class OpenRouterStatisticsController {
 
     try {
       const openRouterKey = await getUserOpenRouterKey(userId);
-
+      
       if (!openRouterKey) {
         throw new AppError(
           'OpenRouter ключ не найден.',

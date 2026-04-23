@@ -100,6 +100,7 @@ const RevokeKeysButton = ({
         onError: handleError,
       },
     );
+    setOpen(false);
   };
 
   const isLoading = revokeKeyMutation.isLoading || revokeKeysMutation.isLoading;
@@ -177,21 +178,17 @@ const SetKeyDialog = ({
   const { getExpiry, saveUserKey } = useUserKey(endpoint);
   const { showToast } = useToastContext();
   const localize = useLocalize();
-  const { setCurrentKey } = useCurrentKey();
+  const { setCurrentKey, errorOpenrouterKey } = useCurrentKey();
 
   useEffect(() => {
-    if(!isFirstRender) {
-      setCurrentKey()
+    if (!isFirstRender) {
+      setCurrentKey();
     } else {
       setIsFirstRender(false);
     }
-  }, [getExpiry])
-  
-  const expirationOptions = Object.values(EXPIRY);
+  }, [getExpiry]);
 
-  const handleExpirationChange = (label: string) => {
-    setExpiresAtLabel(label);
-  };
+  const expirationOptions = Object.values(EXPIRY);
 
   const submit = () => {
     const selectedOption = expirationOptions.find((option) => option.label === expiresAtLabel);
@@ -206,10 +203,6 @@ const SetKeyDialog = ({
     const saveKey = (key: string) => {
       try {
         saveUserKey(key, expiresAt);
-        showToast({
-          message: localize('com_ui_save_key_success'),
-          status: NotificationSeverity.SUCCESS,
-        });
         onOpenChange(false);
       } catch (error) {
         logger.error('Error saving user key:', error);
@@ -320,6 +313,10 @@ const SetKeyDialog = ({
             />
           </FormProvider>
           <HelpText endpoint={endpoint} />
+          {errorOpenrouterKey && <div className="text-text-destructive">{errorOpenrouterKey}</div>}
+          {!errorOpenrouterKey && (
+            <div className="text-surface-submit">Валидный OpenRouter ключ</div>
+          )}
         </div>
         <OGDialogFooter>
           <RevokeKeysButton

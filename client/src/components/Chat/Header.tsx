@@ -15,6 +15,10 @@ import store from '~/store';
 import { OpenrouterButton } from '../OpenrouterButton';
 import { CurrentKeyProvider } from '~/Providers';
 
+import { ModelSelectorProvider } from './Menus/Endpoints/ModelSelectorContext';
+import { ModelSelectorChatProvider } from './Menus/Endpoints/ModelSelectorChatContext';
+import { SettingOpenrouterKeyButton } from '../SettingOpenrouterKeyButton';
+
 const defaultInterface = getConfigDefaults().interface;
 
 function Header() {
@@ -55,20 +59,27 @@ function Header() {
                 !isSmallScreen ? 'transition-all duration-200 ease-in-out' : '',
               )}
             >
-             <CurrentKeyProvider>
-                <ModelSelector startupConfig={startupConfig} />
-                {interfaceConfig.presets === true && interfaceConfig.modelSelect && <PresetsMenu />}
-                {hasAccessToBookmarks === true && <BookmarkMenu />}
-                {hasAccessToMultiConvo === true && <AddMultiConvo />}
-                <OpenrouterButton />
-                {isSmallScreen && (
-                  <>
-                    <ExportAndShareMenu
-                      isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false}
-                    />
-                    {hasAccessToTemporaryChat === true && <TemporaryChat />}
-                  </>
-                )}
+              <CurrentKeyProvider>
+                <ModelSelectorChatProvider>
+                  <ModelSelectorProvider startupConfig={startupConfig}>
+                    <ModelSelector startupConfig={startupConfig} />
+                    {interfaceConfig.presets === true && interfaceConfig.modelSelect && (
+                      <PresetsMenu />
+                    )}
+                    {hasAccessToBookmarks === true && <BookmarkMenu />}
+                    {hasAccessToMultiConvo === true && <AddMultiConvo />}
+                    <OpenrouterButton />
+                    {isSmallScreen && (
+                      <>
+                        <ExportAndShareMenu
+                          isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false}
+                        />
+                        {hasAccessToTemporaryChat === true && <TemporaryChat />}
+                      </>
+                    )}
+                    <SettingOpenrouterKeyButton />
+                  </ModelSelectorProvider>
+                </ModelSelectorChatProvider>
               </CurrentKeyProvider>
             </div>
           )}

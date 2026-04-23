@@ -15,7 +15,6 @@ export async function getUserOpenRouterKey(userId: string): Promise<string | nul
     const objectId = new mongoose.Types.ObjectId(userId);
     const keyValue = await Key.findOne({
       userId: objectId,
-      name: 'OpenRouter',
     }).lean();
 
     if (!keyValue) {
