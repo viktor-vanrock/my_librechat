@@ -74,6 +74,7 @@ bower_components/
 # Environment
 .npmrc
 my.secrets
+.env
 !**/.env.example
 !**/.env.test.example
 cache.json
@@ -97,6 +98,7 @@ config.local.ts
 junit.xml
 **/.venv/
 **/venv/
+
 
 # meilisearch
 meilisearch
@@ -169,4 +171,3 @@ claude-flow
 hive-mind-prompt-*.txt
 CLAUDE.md
 .gsd
-.env
