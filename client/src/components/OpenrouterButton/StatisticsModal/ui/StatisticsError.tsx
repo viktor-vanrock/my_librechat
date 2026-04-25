@@ -16,10 +16,10 @@ export const StatisticsError = ({ fetchBalance, error }: Props) => {
           />
         </svg>
       </div>
-      <p className="mb-4 text-center text-red-600">{error}</p>
+      <p className="mb-4 text-center text-red-500">{error}</p>
       <button
         onClick={() => fetchBalance()}
-        className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+        className="rounded-lg bg-blue-700 px-4 py-2 text-white transition-colors hover:bg-blue-600"
       >
         Повторить попытку
       </button>

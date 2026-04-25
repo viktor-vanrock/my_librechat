@@ -174,12 +174,13 @@ const MessageRender = memo(function MessageRender({
   };
 
   const baseClasses = {
-    common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu ',
+    common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu p-3',
     chat: getChatWidthClass(),
+    blockWrapper: 'bg-gradient-to-l from-white to-[--blue-300] rounded-[16px]',
   };
 
   const conditionalClasses = {
-    focus: 'focus:outline-none focus:ring-2 focus:ring-border-xheavy',
+    focus: 'focus:outline-none focus:ring-2 focus:ring-border-xheavy p-3',
   };
 
   return (
@@ -189,6 +190,7 @@ const MessageRender = memo(function MessageRender({
       className={cn(
         baseClasses.common,
         baseClasses.chat,
+        baseClasses.blockWrapper,
         conditionalClasses.focus,
         'message-render',
       )}

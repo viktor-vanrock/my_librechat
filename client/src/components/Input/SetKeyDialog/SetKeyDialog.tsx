@@ -111,7 +111,7 @@ const RevokeKeysButton = ({
         <OGDialogTrigger asChild>
           <Button
             variant="destructive"
-            className="flex items-center justify-center rounded-lg transition-colors duration-200"
+            className="flex items-center justify-center rounded-lg bg-red-500 transition-colors duration-200"
             onClick={() => setOpen(true)}
             disabled={disabled}
           >
@@ -314,9 +314,7 @@ const SetKeyDialog = ({
           </FormProvider>
           <HelpText endpoint={endpoint} />
           {errorOpenrouterKey && <div className="text-text-destructive">{errorOpenrouterKey}</div>}
-          {!errorOpenrouterKey && (
-            <div className="text-surface-submit">Валидный OpenRouter ключ</div>
-          )}
+          {!errorOpenrouterKey && <div className="text-purple-800">Валидный OpenRouter ключ</div>}
         </div>
         <OGDialogFooter>
           <RevokeKeysButton
