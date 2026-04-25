@@ -1,8 +1,9 @@
 # Старт проекта для dev
 # npm ci
-# npm run frontend
+# npm run build
 # docker-compose -f docker-compose.deps-only.yml up
-# npm run backend
+# npm run backend:dev
+# npm run frontend:dev
 
 # Используемые 
 # chat-mongodb -- База данных MongoDB
