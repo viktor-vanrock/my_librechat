@@ -22,38 +22,38 @@ export const partialTypes = ['text/x-'];
 
 const textDocument = {
   paths: TextPaths,
-  fill: '#FF5588',
+  fill: '#F68079',
   title: 'Document',
 };
 
 const spreadsheet = {
   paths: SheetPaths,
-  fill: '#10A37F',
+  fill: '#7166CD',
   title: 'Spreadsheet',
 };
 
 const codeFile = {
   paths: CodePaths,
-  fill: '#FF6E3C',
+  fill: '#7166CD',
   // TODO: make this dynamic to the language
   title: 'Code',
 };
 
 const artifact = {
   paths: CodePaths,
-  fill: '#2D305C',
+  fill: '#7166CD',
   title: 'Code',
 };
 
 const audioFile = {
   paths: AudioPaths,
-  fill: '#FF6B35',
+  fill: '#7166CD',
   title: 'Audio',
 };
 
 const videoFile = {
   paths: VideoPaths,
-  fill: '#8B5CF6',
+  fill: '#7166CD',
   title: 'Video',
 };
 
@@ -61,7 +61,7 @@ export const fileTypes = {
   /* Category matches */
   file: {
     paths: FilePaths,
-    fill: '#0000FF',
+    fill: '#7166CD',
     title: 'File',
   },
   text: textDocument,

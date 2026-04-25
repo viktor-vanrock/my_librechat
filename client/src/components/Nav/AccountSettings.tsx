@@ -31,11 +31,13 @@ function AccountSettings({ collapsed = false }: { collapsed?: boolean }) {
             : 'mt-text-sm flex h-auto w-full items-center gap-2 rounded-xl p-2 text-sm transition-all duration-200 ease-in-out hover:bg-surface-active-alt aria-[expanded=true]:bg-surface-active-alt'
         }
       >
-        <div
-          className={collapsed ? 'size-7 flex-shrink-0' : '-ml-0.9 -mt-0.8 h-8 w-8 flex-shrink-0'}
-        >
+        <div>
           <div className="relative flex">
-            <Avatar user={user} size={collapsed ? 28 : 32} />
+            <div
+              className={`flex h-7 w-7 items-center justify-center rounded-full bg-[#7166CD] text-center text-[12px] font-medium text-white shadow-[0_0_0_1px_rgba(240,246,252,0.1)]`}
+            >
+              {user?.name.slice(0, 2).toUpperCase()}
+            </div>
           </div>
         </div>
         {!collapsed && (
@@ -73,7 +75,7 @@ function AccountSettings({ collapsed = false }: { collapsed?: boolean }) {
           <FileText className="icon-md" aria-hidden="true" />
           {localize('com_nav_my_files')}
         </Menu.MenuItem>
-        {startupConfig?.helpAndFaqURL !== '/' && (
+        {/* {startupConfig?.helpAndFaqURL !== '/' && (
           <Menu.MenuItem
             onClick={() => window.open(startupConfig?.helpAndFaqURL, '_blank')}
             className="select-item text-sm"
@@ -81,11 +83,11 @@ function AccountSettings({ collapsed = false }: { collapsed?: boolean }) {
             <LinkIcon aria-hidden="true" />
             {localize('com_nav_help_faq')}
           </Menu.MenuItem>
-        )}
-        <Menu.MenuItem onClick={() => setShowSettings(true)} className="select-item text-sm">
+        )} */}
+        {/* <Menu.MenuItem onClick={() => setShowSettings(true)} className="select-item text-sm">
           <GearIcon className="icon-md" aria-hidden="true" />
           {localize('com_nav_settings')}
-        </Menu.MenuItem>
+        </Menu.MenuItem> */}
         <DropdownMenuSeparator />
         <Menu.MenuItem onClick={() => logout()} className="select-item text-sm">
           <LogOut className="icon-md" aria-hidden="true" />

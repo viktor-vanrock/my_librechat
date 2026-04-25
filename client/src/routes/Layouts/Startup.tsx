@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation, useNavigation } from 'react-router-dom';
 import type { TStartupConfig } from 'librechat-data-provider';
 import { TranslationKeys, useLocalize } from '~/hooks';
 import { useGetStartupConfig } from '~/data-provider';
 import AuthLayout from '~/components/Auth/AuthLayout';
 import { REDIRECT_PARAM, SESSION_KEY } from '~/utils';
+import { Spinner } from '@librechat/client';
 
 const headerMap: Record<string, TranslationKeys> = {
   '/login': 'com_auth_welcome_back',
@@ -28,6 +29,8 @@ export default function StartupLayout({ isAuthenticated }: { isAuthenticated?: b
   const localize = useLocalize();
   const navigate = useNavigate();
   const location = useLocation();
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading' || isFetching;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -63,15 +66,28 @@ export default function StartupLayout({ isAuthenticated }: { isAuthenticated?: b
   };
 
   return (
-    <AuthLayout
-      header={headerText ? localize(headerText) : localize(headerMap[location.pathname])}
-      isFetching={isFetching}
-      startupConfig={startupConfig}
-      startupConfigError={startupConfigError}
-      pathname={location.pathname}
-      error={error}
-    >
-      <Outlet context={contextValue} />
-    </AuthLayout>
+    <div className="flex min-h-screen items-center justify-center">
+      <img
+        src="assets/sberLogo.png"
+        alt={`sber logo Icon`}
+        className="absolute top-[20px] z-[101]"
+      />
+      <AuthLayout
+        header={headerText ? localize(headerText) : localize(headerMap[location.pathname])}
+        isFetching={isFetching}
+        startupConfig={startupConfig}
+        startupConfigError={startupConfigError}
+        pathname={location.pathname}
+        error={error}
+      >
+        {isLoading ? (
+          <div className="flex min-h-64 items-center justify-center">
+            <Spinner size={32} />
+          </div>
+        ) : (
+          <Outlet context={contextValue} />
+        )}
+      </AuthLayout>
+    </div>
   );
 }

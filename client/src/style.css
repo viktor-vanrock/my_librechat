@@ -6,16 +6,14 @@
 :root {
   --white: #fff;
   --black: #000;
+  --color-blue-500: #000;
   --gray-20: #ececf1;
   --gray-50: #f7f7f8;
   --gray-100: #ececec;
   --gray-200: #e3e3e3;
-  --gray-300: #cdcdcd;
   --gray-400: #999696;
   --gray-500: #595959;
-  --gray-600: #424242;
   --gray-700: #2f2f2f;
-  --gray-800: #212121;
   --gray-850: #171717;
   --gray-900: #0d0d0d;
   --green-50: #ecfdf5;
@@ -25,16 +23,12 @@
   --green-400: #34d399;
   --green-500: #10b981;
   --green-600: #059669;
-  --green-700: #047857;
-  --green-800: #065f46;
   --green-900: #064e3b;
   --green-950: #022c22;
   --red-50: #fef2f2;
   --red-100: #fee2e2;
   --red-200: #fecaca;
-  --red-300: #fca5a5;
   --red-400: #f87171;
-  --red-500: #ef4444;
   --red-600: #dc2626;
   --red-700: #b91c1c;
   --red-800: #991b1b;
@@ -61,6 +55,25 @@
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
   --markdown-font-size: 1rem;
+    /* color sber AI */
+  --gray-300: #AFABAB;
+  --gray-600: #404040;
+  --gray-800: #404040;
+  --green-700: #BDFFED;
+  --green-800: #6BEAC7;
+  --red-300: #F6CABA;
+  --red-500: #F68079;
+  --blue-100: #F1F1FF;
+  --blue-200: #E7E7FF;
+  --blue-300: #B6E2FF;
+  --blue-500: #5AB0FF;
+  --purple-400: #C7C0FF;
+  --purple-500: #BFB8E5;
+  --purple-600: #9A92D1;
+  --purple-700: #7168B9;
+  --purple-800: #5A50AA;
+  --purple-900: #7166CD;
+    /* color sber AI */
 }
 html {
   --brand-purple: #ab68ff;
@@ -80,15 +93,15 @@ html {
   --surface-hover: var(--gray-200);
   --surface-hover-alt: var(--gray-300);
   --surface-primary: var(--white);
-  --surface-primary-alt: var(--gray-50);
+  --surface-primary-alt: var(--white);
   --surface-primary-contrast: var(--gray-100);
   --surface-secondary: var(--gray-50);
   --surface-secondary-alt: var(--gray-200);
   --surface-tertiary: var(--gray-100);
   --surface-tertiary-alt: var(--white);
   --surface-dialog: var(--white);
-  --surface-submit: var(--green-700);
-  --surface-submit-hover: var(--green-800);
+  --surface-submit: var(--blue-500);
+  --surface-submit-hover: var(--blue-500);
   --surface-destructive: var(--red-700);
   --surface-destructive-hover: var(--red-800);
   --surface-chat: var(--white);

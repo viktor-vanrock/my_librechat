@@ -165,8 +165,9 @@ const ContentRender = memo(function ContentRender({
   };
 
   const baseClasses = {
-    common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu ',
+    common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu p-3',
     chat: getChatWidthClass(),
+    blockWrapper: 'bg-white rounded-[16px] ',
   };
 
   const conditionalClasses = {
@@ -180,6 +181,7 @@ const ContentRender = memo(function ContentRender({
       className={cn(
         baseClasses.common,
         baseClasses.chat,
+        baseClasses.blockWrapper,
         conditionalClasses.focus,
         'message-render',
       )}

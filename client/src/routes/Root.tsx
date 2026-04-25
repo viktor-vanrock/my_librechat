@@ -71,7 +71,13 @@ export default function Root() {
             <PromptGroupsProvider>
               <Banner onHeightChange={setBannerHeight} />
               <div className="flex" style={{ height: `calc(100dvh - ${bannerHeight}px)` }}>
-                <div className="relative z-0 flex h-full w-full overflow-hidden">
+                <div
+                  className="z-1 absolute left-0 top-0 flex h-full w-full overflow-hidden"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(to bottom right, var(--white) 0%, var(--blue-300) 70%, var(--green-700) 100%)',
+                  }}
+                >
                   <UnifiedSidebar />
                   <div
                     className="relative flex h-full max-w-full flex-1 flex-col overflow-hidden"
